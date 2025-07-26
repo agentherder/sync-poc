@@ -8,5 +8,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: resolve(__dirname, "dist"),
+    emptyOutDir: true,
+    sourcemap: true,
   },
 });

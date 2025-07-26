@@ -1,5 +1,5 @@
 {
-  "name": "todo-app",
+  "name": "todo-sync",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:extension": "vite build --config vite.extension.config.ts"
   },
   "dependencies": {
     "react": "^19.1.0",
