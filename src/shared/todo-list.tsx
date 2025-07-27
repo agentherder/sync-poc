@@ -1,10 +1,5 @@
 import React from "react";
-
-type Todo = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
+import type { Todo } from "./types";
 
 const initialTodos: Todo[] = [
   { id: crypto.randomUUID(), title: "apples", completed: false },

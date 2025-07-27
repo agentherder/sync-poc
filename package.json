@@ -12,6 +12,7 @@
     "watch:ext": "vite build --config vite.extension.config.ts --watch"
   },
   "dependencies": {
+    "idb": "^8.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
