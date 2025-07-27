@@ -2,6 +2,13 @@
   font-family: sans-serif;
 }
 
+body.extension-popup {
+  min-width: 200px;
+  h1 {
+    font-size: 1.25rem;
+  }
+}
+
 ul {
   padding: 0;
 }

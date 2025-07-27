@@ -2,17 +2,23 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
 
-// https://vite.dev/config/
+const extensionDir = resolve(__dirname, "src/extension");
+
 export default defineConfig({
-  root: resolve(__dirname, "src", "extension"),
+  root: extensionDir,
   plugins: [react()],
-  publicDir: ".",
+  publicDir: "public",
   build: {
     outDir: resolve(__dirname, "dist-extension"),
     emptyOutDir: true,
+    sourcemap: true,
     rollupOptions: {
       input: {
-        popup: resolve(__dirname, "src", "extension", "pages", "popup.html"),
+        popup: resolve(extensionDir, "popup.html"),
+        sidepanel: resolve(extensionDir, "sidepanel.html"),
+        page: resolve(extensionDir, "page.html"),
+        background: resolve(extensionDir, "scripts/background.ts"),
+        content: resolve(extensionDir, "scripts/content.ts"),
       },
       output: {
         entryFileNames: "scripts/[name].js",
