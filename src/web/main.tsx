@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "../shared/styles.css";
 import { TodoList } from "../shared/todo-list";
-import "../styles.css";
 
 console.log("[TodoSync] web app loading on", location?.href);
 

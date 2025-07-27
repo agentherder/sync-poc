@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "../../shared/styles.css";
 import { TodoList } from "../../shared/todo-list";
-
 import { PageLink } from "../components/page-link";
 
 console.log("[TodoSync] extension page loading on", location?.href);
