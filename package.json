@@ -8,8 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:ext": "vite build --config vite.extension.config.ts",
-    "watch:ext": "vite build --config vite.extension.config.ts --watch"
+    "build:ext": "vite build --config vite.extension.config.ts && vite build --config vite.content.config.ts"
   },
   "dependencies": {
     "idb": "^8.0.3",

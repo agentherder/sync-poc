@@ -1,11 +1,11 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
+import { defineConfig } from "vite";
 
-const extensionDir = resolve(__dirname, "src/extension");
+const root = resolve(__dirname, "src/extension");
 
 export default defineConfig({
-  root: extensionDir,
+  root,
   plugins: [react()],
   publicDir: "public",
   build: {
@@ -14,11 +14,10 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        popup: resolve(extensionDir, "popup.html"),
-        sidepanel: resolve(extensionDir, "sidepanel.html"),
-        page: resolve(extensionDir, "page.html"),
-        background: resolve(extensionDir, "scripts/background.ts"),
-        content: resolve(extensionDir, "scripts/content.ts"),
+        popup: resolve(root, "popup.html"),
+        sidepanel: resolve(root, "sidepanel.html"),
+        page: resolve(root, "page.html"),
+        background: resolve(root, "scripts/background.ts"),
       },
       output: {
         entryFileNames: "scripts/[name].js",

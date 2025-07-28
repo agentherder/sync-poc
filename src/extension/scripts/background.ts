@@ -1,10 +1,13 @@
 import { openDB, type DBSchema } from "idb";
-import type { ClientRequest, Todo, TodoChange } from "../../shared/types";
+import { log } from "../../shared/log";
+import {
+  isTodoSyncEnvelope,
+  type Todo,
+  type TodoEvent,
+  type TodoSyncEnvelope,
+} from "../../shared/types";
 
-console.log(
-  "[TodoSync] extension background service worker loading on",
-  location?.href
-);
+log("extension background service worker loading");
 
 interface TodoDB extends DBSchema {
   todos: {
@@ -21,7 +24,7 @@ const dbPromise = openDB<TodoDB>("todo-sync", 1, {
   },
 });
 
-dbPromise.then((db) => console.log("[TodoSync] extensionDB ready", db));
+dbPromise.then((db) => log("extensionDB ready", db));
 
 export async function getAllTodos() {
   return (await dbPromise).getAll("todos");
@@ -53,29 +56,33 @@ chrome.runtime.onConnect.addListener((port) => {
   ports.add(port);
 
   // send initial snapshot
-  getAllTodos().then((todos) =>
-    port.postMessage({ type: "init", todos } as TodoChange)
-  );
+  getAllTodos().then((todos) => {
+    const msg: TodoSyncEnvelope = {
+      todoSync: true,
+      evt: { action: "init", todos },
+    };
+    port.postMessage(msg);
+  });
 
-  port.onMessage.addListener(async (msg: ClientRequest) => {
-    console.log(
-      "[TodoSync] extension background service worker received message",
-      msg
-    );
-    switch (msg.type) {
+  port.onMessage.addListener(async (msg: unknown) => {
+    if (!isTodoSyncEnvelope(msg) || !msg.cmd) return;
+    log("extension background service worker received message", msg);
+    const { cmd } = msg;
+    switch (cmd.action) {
       case "create": {
-        const todo = await addTodo(msg.title);
-        broadcast({ type: "create", todo });
+        const todo = await addTodo(cmd.title);
+        broadcast({ action: "create", todo });
         break;
       }
       case "update": {
-        const todo = await updateTodo(msg.id, msg.completed);
-        if (todo) broadcast({ type: "update", todo });
+        const todo = await updateTodo(cmd.id, cmd.completed);
+        if (!todo) break;
+        broadcast({ action: "update", todo });
         break;
       }
       case "delete": {
-        await deleteTodo(msg.id);
-        broadcast({ type: "delete", id: msg.id });
+        await deleteTodo(cmd.id);
+        broadcast({ action: "delete", id: cmd.id });
         break;
       }
     }
@@ -84,6 +91,7 @@ chrome.runtime.onConnect.addListener((port) => {
   port.onDisconnect.addListener(() => ports.delete(port));
 });
 
-function broadcast(change: TodoChange) {
-  for (const p of ports) p.postMessage(change);
+function broadcast(evt: TodoEvent) {
+  const msg: TodoSyncEnvelope = { todoSync: true, evt };
+  for (const p of ports) p.postMessage(msg);
 }

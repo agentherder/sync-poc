@@ -24,7 +24,8 @@ A simple todo app built with React and TypeScript.
 ├── tsconfig.app.json             # Web app + extension TS config
 ├── tsconfig.node.json            # Vite TS config
 ├── vite.config.ts              # Web app build config
-├── vite.extension.config.ts    # Extension build config
+├── vite.extension.config.ts    # Extension modules build config
+├── vite.content.config.ts      # Extension IIFE content script build config
 ├── dist/                      # Web app build output
 └── dist-extension/            # Extension build output
 ```
@@ -40,7 +41,6 @@ A simple todo app built with React and TypeScript.
 **Extension**
 
 - `npm run build:extension` Build extension to `dist-extension/`
-- `npm run watch:extension` Watch and build extension on change
 
 **Both**
 

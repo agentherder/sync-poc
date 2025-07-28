@@ -18,7 +18,6 @@
     {
       "matches": ["<all_urls>"],
       "js": ["scripts/content.js"],
-      "type": "module",
       "run_at": "document_idle"
     }
   ],
