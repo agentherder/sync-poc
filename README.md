@@ -53,6 +53,7 @@ A simple todo app built with React and TypeScript.
 - [TypeScript](https://www.typescriptlang.org/docs/) Typechecking
 - [Vercel](https://vercel.com/docs) Web app hosting
 - [Chrome Extensions docs](https://developer.chrome.com/docs/extensions) Browser extension
+- [idb](https://github.com/jakearchibald/idb) IndexedDB wrapper
 
 ## Planned PoC
 
