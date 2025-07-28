@@ -1,6 +1,7 @@
 import { useQuery } from "@triplit/react";
 import React from "react";
 import { triplit } from "../../triplit/client";
+import { DBStatus } from "./db-status";
 
 function useTodos() {
   const todosQuery = triplit.query("todos").Order("createdAt", "DESC");
@@ -22,6 +23,7 @@ export function TodoList() {
 
   return (
     <div>
+      <DBStatus />
       <form onSubmit={handleSubmit}>
         <input type="text" ref={inputRef} />
         <button type="submit">Add</button>
