@@ -21,6 +21,7 @@ Try a proof-of-concept for the core features:
 - Web app: Slightly reorganized [Vite + React + TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
 - PWA: [Vite PWA plugin](https://vite-plugin-pwa.netlify.app/) using [inject manifest](https://vite-pwa-org.netlify.app/guide/inject-manifest.html) strategy
 - Chrome extension: Custom Vite config based on [Chrome Extensions docs](https://developer.chrome.com/docs/extensions)
+- Realtime DB: [Triplit](https://triplit.dev/)
 
 ## Repository Structure
 
@@ -55,6 +56,10 @@ Try a proof-of-concept for the core features:
 │       ├── log.ts               # Console logging + info util
 │       └── styles.css           # Basic styles
 │
+├── triplit/                   # Triplit DB config
+│   ├── schema.ts
+│   └── client.ts
+│
 ├── .env                       # Local env vars (git ignored)
 ├── .env.example               # Local env vars example
 │
@@ -73,6 +78,7 @@ Try a proof-of-concept for the core features:
 ## Command Cheatsheet
 
 - `npm run build` Build web + extension
+- `npx triplit dev` Start Triplit dev server
 - `npm run typecheck` Typecheck web + extension + shared
 - `npm run lint` ESLint web + extension + shared
 

@@ -1,22 +1,34 @@
+import { useQuery } from "@triplit/react";
 import React from "react";
-import { useTodoState } from "./todo-state";
+import { triplit } from "../../triplit/client";
+
+function useTodos() {
+  const todosQuery = triplit.query("todos").Order("createdAt", "DESC");
+  const { results: todos, error } = useQuery(triplit, todosQuery);
+  return { todos, error };
+}
 
 export function TodoList() {
-  const state = useTodoState();
-
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleSubmit: React.FormEventHandler = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputRef.current?.value) return;
-    state.create(inputRef.current.value);
+    await triplit.insert("todos", { title: inputRef.current.value });
     inputRef.current.value = "";
   };
 
+  const { todos, error } = useTodos();
+
   return (
     <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" ref={inputRef} />
+        <button type="submit">Add</button>
+      </form>
+      {error && <div>{error.message}</div>}
       <ul>
-        {state.todos.map((todo) => (
+        {todos?.map((todo) => (
           <li
             key={todo.id}
             className={todo.completed ? "completed" : undefined}
@@ -24,17 +36,17 @@ export function TodoList() {
             <input
               type="checkbox"
               checked={todo.completed}
-              onChange={(e) => state.update(todo.id, e.target.checked)}
+              onChange={(e) =>
+                triplit.update("todos", todo.id, {
+                  completed: e.target.checked,
+                })
+              }
             />
             <span>{todo.title}</span>
-            <button onClick={() => state.delete(todo.id)}>x</button>
+            <button onClick={() => triplit.delete("todos", todo.id)}>x</button>
           </li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
-        <input type="text" ref={inputRef} />
-        <button type="submit">Add</button>
-      </form>
     </div>
   );
 }
