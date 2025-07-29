@@ -19,6 +19,7 @@ Try a proof-of-concept for the core features:
 - UI: [React](https://react.dev/)
 - Types: [TypeScript](https://www.typescriptlang.org/docs/)
 - Web app: Slightly reorganized [Vite + React + TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
+- PWA: [Vite PWA plugin](https://vite-plugin-pwa.netlify.app/) using [inject manifest](https://vite-pwa-org.netlify.app/guide/inject-manifest.html) strategy
 - Chrome extension: Custom Vite config based on [Chrome Extensions docs](https://developer.chrome.com/docs/extensions)
 
 ## Repository Structure
@@ -29,7 +30,8 @@ Try a proof-of-concept for the core features:
 │   ├── web/                   # Web app source
 │   │   ├── public/
 │   │   ├── index.html
-│   │   └── main.tsx
+│   │   ├── main.tsx
+│   │   └── sw.ts                # PWA service worker
 │   │
 │   ├── extension/             # Chome extension source
 │   │   ├── public/
