@@ -1,6 +1,17 @@
-# Todo App
+# Todo Sync PoC
 
-A simple todo app built with React and TypeScript.
+A basic todo component that renders in a web app and browser extension.
+
+No sync between any components, tabs, web or extension.
+This serves as a barebones foundation for exploring sync solutions.
+
+## Planned PoC
+
+Try a proof-of-concept for the core features:
+
+1. A Chrome-only web SPA with persistent offline state
+2. A Chrome-only browser extension with persistent offline state
+3. Sync state offline between extension and web SPA and across tabs
 
 ## Repository Structure
 
@@ -14,14 +25,24 @@ A simple todo app built with React and TypeScript.
 │   ├── extension/             # Extension source
 │   │   ├── public/
 │   │   │   └── manifest.json
-│   │   ├── scripts/
 │   │   ├── components/
-│   │   ├── page.html
-│   │   ├── popup.html
-│   │   └── sidepanel.html
-│   └── shared/                # Shared code and styles
+│   │   │   └── page-link.tsx
+│   │   ├── pages/
+│   │   │   ├── popup.html
+│   │   │   ├── popup.tsx
+│   │   │   ├── sidepanel.html
+│   │   │   ├── sidepanel.tsx
+│   │   │   ├── page.html
+│   │   │   └── page.tsx
+│   │   └── scripts/
+│   │       ├── background.ts
+│   │       └── content.ts
+│   └── shared/                # Shared source
+│       ├── todo-list.tsx        # UI only component
+│       ├── todo-state.tsx       # Ephemeral `React.useState` hook
+│       └── styles.css           # Basic styles
 ├── tsconfig.json               # Root TS config
-├── tsconfig.app.json             # Web app + extension TS config
+├── tsconfig.app.json             # Web + extension + TS config
 ├── tsconfig.node.json            # Vite TS config
 ├── vite.config.ts              # Web app build config
 ├── vite.extension.config.ts    # Extension build config
@@ -51,13 +72,4 @@ A simple todo app built with React and TypeScript.
 - [Vite](https://vite.dev/guide/) Bundler
 - [React](https://react.dev/) UI library
 - [TypeScript](https://www.typescriptlang.org/docs/) Typechecking
-- [Vercel](https://vercel.com/docs) Web app hosting
 - [Chrome Extensions docs](https://developer.chrome.com/docs/extensions) Browser extension
-
-## Planned PoC
-
-This app is a proof-of-concept for the following features:
-
-1. A Chrome-only web SPA with persistent offline state
-2. A Chrome-only browser extension with persistent offline state
-3. Sync state offline between extension and web SPA and across tabs

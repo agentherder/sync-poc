@@ -14,9 +14,9 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       input: {
-        popup: resolve(extensionDir, "popup.html"),
-        sidepanel: resolve(extensionDir, "sidepanel.html"),
-        page: resolve(extensionDir, "page.html"),
+        popup: resolve(extensionDir, "pages/popup.html"),
+        sidepanel: resolve(extensionDir, "pages/sidepanel.html"),
+        page: resolve(extensionDir, "pages/page.html"),
         background: resolve(extensionDir, "scripts/background.ts"),
         content: resolve(extensionDir, "scripts/content.ts"),
       },

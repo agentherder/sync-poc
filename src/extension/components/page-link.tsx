@@ -1,4 +1,4 @@
-const url = chrome?.runtime.getURL("page.html");
+const url = chrome?.runtime.getURL("pages/page.html");
 
 export function PageLink() {
   if (!url) return null;

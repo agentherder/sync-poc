@@ -5,10 +5,10 @@
   "version": "0.0.1",
   "description": "A basic todo list",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "pages/popup.html"
   },
   "side_panel": {
-    "default_path": "sidepanel.html"
+    "default_path": "pages/sidepanel.html"
   },
   "background": {
     "service_worker": "scripts/background.js",

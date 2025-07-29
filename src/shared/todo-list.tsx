@@ -1,49 +1,22 @@
 import React from "react";
-
-type Todo = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
-
-const initialTodos: Todo[] = [
-  { id: crypto.randomUUID(), title: "apples", completed: false },
-  { id: crypto.randomUUID(), title: "bananas", completed: false },
-];
+import { useTodoState } from "./todo-state";
 
 export function TodoList() {
-  const [todos, setTodos] = React.useState<Todo[]>(initialTodos);
+  const state = useTodoState();
+
   const inputRef = React.useRef<HTMLInputElement>(null);
-
-  const handleSetCompleted = (id: string, completed: boolean) => {
-    setTodos((prev) =>
-      prev.map((todo) => {
-        if (todo.id !== id) return todo;
-        return { ...todo, completed };
-      })
-    );
-  };
-
-  const handleDelete = (id: string) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  };
 
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault();
     if (!inputRef.current?.value) return;
-    const newTodo: Todo = {
-      id: crypto.randomUUID(),
-      title: inputRef.current.value,
-      completed: false,
-    };
-    setTodos((prev) => [...prev, newTodo]);
+    state.create(inputRef.current.value);
     inputRef.current.value = "";
   };
 
   return (
     <div>
       <ul>
-        {todos.map((todo) => (
+        {state.todos.map((todo) => (
           <li
             key={todo.id}
             className={todo.completed ? "completed" : undefined}
@@ -51,10 +24,10 @@ export function TodoList() {
             <input
               type="checkbox"
               checked={todo.completed}
-              onChange={(e) => handleSetCompleted(todo.id, e.target.checked)}
+              onChange={(e) => state.update(todo.id, e.target.checked)}
             />
             <span>{todo.title}</span>
-            <button onClick={() => handleDelete(todo.id)}>x</button>
+            <button onClick={() => state.delete(todo.id)}>x</button>
           </li>
         ))}
       </ul>
