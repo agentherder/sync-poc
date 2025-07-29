@@ -4,12 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run build:web && npm run build:extension",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "build:ext": "vite build --config vite.extension.config.ts",
-    "watch:ext": "vite build --config vite.extension.config.ts --watch"
+    "dev:web": "vite --config vite.web.config.ts",
+    "build:web": "vite build --config vite.web.config.ts",
+    "preview:web": "vite preview --config vite.web.config.ts",
+    "dev:extension": "vite build --config vite.extension.config.ts --watch",
+    "build:extension": "vite build --config vite.extension.config.ts"
   },
   "dependencies": {
     "react": "^19.1.0",

@@ -2,7 +2,7 @@
 
 A basic todo component that renders in a web app and browser extension.
 
-No sync between any components, tabs, web or extension.
+No sync between any: components, tabs, web, extension.
 This serves as a barebones foundation for exploring sync solutions.
 
 ## Planned PoC
@@ -13,6 +13,14 @@ Try a proof-of-concept for the core features:
 2. A Chrome-only browser extension with persistent offline state
 3. Sync state offline between extension and web SPA and across tabs
 
+## Current Tech Stack
+
+- Bundler: [Vite](https://vite.dev/guide/)
+- UI: [React](https://react.dev/)
+- Types: [TypeScript](https://www.typescriptlang.org/docs/)
+- Web app: Slightly reorganized [Vite + React + TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
+- Chrome extension: Custom Vite config based on [Chrome Extensions docs](https://developer.chrome.com/docs/extensions)
+
 ## Repository Structure
 
 ```
@@ -22,7 +30,8 @@ Try a proof-of-concept for the core features:
 │   │   ├── public/
 │   │   ├── index.html
 │   │   └── main.tsx
-│   ├── extension/             # Extension source
+│   │
+│   ├── extension/             # Chome extension source
 │   │   ├── public/
 │   │   │   └── manifest.json
 │   │   ├── components/
@@ -37,39 +46,36 @@ Try a proof-of-concept for the core features:
 │   │   └── scripts/
 │   │       ├── background.ts
 │   │       └── content.ts
+│   │
 │   └── shared/                # Shared source
 │       ├── todo-list.tsx        # UI only component
 │       ├── todo-state.tsx       # Ephemeral `React.useState` hook
 │       └── styles.css           # Basic styles
+│
 ├── tsconfig.json               # Root TS config
-├── tsconfig.app.json             # Web + extension + TS config
+├── tsconfig.app.json             # Web + extension + shared TS config
 ├── tsconfig.node.json            # Vite TS config
-├── vite.config.ts              # Web app build config
+│
+├── vite.web.config.ts          # Web build config
 ├── vite.extension.config.ts    # Extension build config
-├── dist/                      # Web app build output
+│
+├── dist-web/                  # Web build output
 └── dist-extension/            # Extension build output
 ```
 
 ## Command Cheatsheet
 
+- `npm run build` Build web + extension
+- `npm run typecheck` Typecheck web + extension + shared
+- `npm run lint` ESLint web + extension + shared
+
 **Web App**
 
-- `npm run dev` Web app hot module reloading dev server
-- `npm run build` Build web app to `dist/`
-- `npm run preview` Preview the web app build
+- `npm run dev:web` Web app hot module reloading dev server
+- `npm run build:web` Build web app to `dist-web/`
+- `npm run preview:web` Preview the web app build
 
 **Extension**
 
+- `npm run dev:extension` Watch and build extension on change (no HMR)
 - `npm run build:extension` Build extension to `dist-extension/`
-- `npm run watch:extension` Watch and build extension on change
-
-**Both**
-
-- `npm run lint` ESLint
-
-## Tech Stack
-
-- [Vite](https://vite.dev/guide/) Bundler
-- [React](https://react.dev/) UI library
-- [TypeScript](https://www.typescriptlang.org/docs/) Typechecking
-- [Chrome Extensions docs](https://developer.chrome.com/docs/extensions) Browser extension
