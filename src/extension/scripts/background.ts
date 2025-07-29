@@ -1,4 +1,3 @@
-console.log(
-  "[TodoSync] extension background service worker loading on",
-  location?.href
-);
+import { log } from "../../shared/log";
+
+log("extension background service worker loading");

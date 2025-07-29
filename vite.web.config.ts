@@ -6,6 +6,7 @@ export default defineConfig({
   root: resolve(__dirname, "src/web"),
   plugins: [react()],
   publicDir: "public",
+  envDir: __dirname,
   build: {
     outDir: resolve(__dirname, "dist-web"),
     emptyOutDir: true,

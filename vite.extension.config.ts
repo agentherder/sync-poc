@@ -8,6 +8,7 @@ export default defineConfig({
   root: extensionDir,
   plugins: [react()],
   publicDir: "public",
+  envDir: __dirname,
   build: {
     outDir: resolve(__dirname, "dist-extension"),
     emptyOutDir: true,

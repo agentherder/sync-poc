@@ -1,9 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { log } from "../shared/log";
 import "../shared/styles.css";
 import { TodoList } from "../shared/todo-list";
 
-console.log("[TodoSync] web app loading on", location?.href);
+log("web app loading");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

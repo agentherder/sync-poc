@@ -50,7 +50,11 @@ Try a proof-of-concept for the core features:
 │   └── shared/                # Shared source
 │       ├── todo-list.tsx        # UI only component
 │       ├── todo-state.tsx       # Ephemeral `React.useState` hook
+│       ├── log.ts               # Console logging + info util
 │       └── styles.css           # Basic styles
+│
+├── .env                       # Local env vars (git ignored)
+├── .env.example               # Local env vars example
 │
 ├── tsconfig.json               # Root TS config
 ├── tsconfig.app.json             # Web + extension + shared TS config
