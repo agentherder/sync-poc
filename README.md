@@ -61,7 +61,8 @@ Try a proof-of-concept for the core features:
 ├── tsconfig.node.json            # Vite TS config
 │
 ├── vite.web.config.ts          # Web build config
-├── vite.extension.config.ts    # Extension build config
+├── vite.extension.config.ts    # Extension primary build config
+├── vite.content.config.ts      # Extension content IIFE build config
 │
 ├── dist-web/                  # Web build output
 └── dist-extension/            # Extension build output
@@ -81,5 +82,4 @@ Try a proof-of-concept for the core features:
 
 **Extension**
 
-- `npm run dev:extension` Watch and build extension on change (no HMR)
 - `npm run build:extension` Build extension to `dist-extension/`

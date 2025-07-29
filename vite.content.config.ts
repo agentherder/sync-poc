@@ -11,19 +11,15 @@ export default defineConfig({
   envDir: __dirname,
   build: {
     outDir: resolve(__dirname, "dist-extension"),
-    emptyOutDir: true,
+    emptyOutDir: false,
     sourcemap: true,
     rollupOptions: {
       input: {
-        popup: resolve(extensionDir, "pages/popup.html"),
-        sidepanel: resolve(extensionDir, "pages/sidepanel.html"),
-        page: resolve(extensionDir, "pages/page.html"),
-        background: resolve(extensionDir, "scripts/background.ts"),
+        content: resolve(extensionDir, "scripts/content.ts"),
       },
       output: {
-        entryFileNames: "scripts/[name].js",
-        chunkFileNames: "scripts/[name]-[hash].js",
-        assetFileNames: "assets/[name][extname]",
+        format: "iife",
+        entryFileNames: "scripts/content.js",
       },
     },
   },
