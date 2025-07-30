@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run build:web && npm run build:extension",
+    "build:dev": "NODE_ENV=development npm run build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "dev:web": "vite --config vite.web.config.ts",

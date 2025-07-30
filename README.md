@@ -73,6 +73,7 @@ Try a proof-of-concept for the core features:
 ## Command Cheatsheet
 
 - `npm run build` Build web + extension
+- `npm run build:dev` Build web + extension with `NODE_ENV=development`
 - `npm run typecheck` Typecheck web + extension + shared
 - `npm run lint` ESLint web + extension + shared
 
