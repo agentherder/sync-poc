@@ -1,19 +1,23 @@
 import React from "react";
-import { useRow, useRowIds } from "tinybase/ui-react";
-import { todoStore } from "./todo-store";
+import {
+  useAddRowCallback,
+  useDelRowCallback,
+  useRow,
+  useRowIds,
+  useSetCellCallback,
+} from "tinybase/ui-react";
 
 export function TodoList() {
   const todoIds = useRowIds("todos");
 
   const inputRef = React.useRef<HTMLInputElement>(null);
 
+  const addTodo = useAddRowCallback("todos", (title: string) => ({ title }));
+
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault();
     if (!inputRef.current?.value) return;
-    todoStore.setRow("todos", crypto.randomUUID(), {
-      title: inputRef.current.value,
-      completed: false,
-    });
+    addTodo(inputRef.current.value);
     inputRef.current.value = "";
   };
 
@@ -34,17 +38,21 @@ export function TodoList() {
 
 function TodoItem({ id }: { id: string }) {
   const todo = useRow("todos", id);
+
+  const toggleTodo = useSetCellCallback(
+    "todos",
+    id,
+    "completed",
+    (e: React.ChangeEvent<HTMLInputElement>) => e.target.checked
+  );
+
+  const delTodo = useDelRowCallback("todos", id);
+
   return (
     <li key={id} className={todo.completed ? "completed" : undefined}>
-      <input
-        type="checkbox"
-        checked={!!todo.completed}
-        onChange={(e) =>
-          todoStore.setRow("todos", id, { completed: e.target.checked })
-        }
-      />
+      <input type="checkbox" checked={!!todo.completed} onChange={toggleTodo} />
       <span>{todo.title}</span>
-      <button onClick={() => todoStore.delRow("todos", id)}>x</button>
+      <button onClick={delTodo}>x</button>
     </li>
   );
 }
