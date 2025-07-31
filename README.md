@@ -2,8 +2,9 @@
 
 A basic todo component that renders in a web app and browser extension.
 
-No sync between any: components, tabs, web, extension.
-This serves as a barebones foundation for exploring sync solutions.
+Sync works between tabs withing the web app.
+And sync works between extension surfaces: popup, sidepanel, page.
+But sync does **not yet** work between the web app and the extension.
 
 ## Planned PoC
 
@@ -21,6 +22,7 @@ Try a proof-of-concept for the core features:
 - Web app: Slightly reorganized [Vite + React + TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
 - PWA: [Vite PWA plugin](https://vite-plugin-pwa.netlify.app/) using [inject manifest](https://vite-pwa-org.netlify.app/guide/inject-manifest.html) strategy
 - Chrome extension: Custom Vite config based on [Chrome Extensions docs](https://developer.chrome.com/docs/extensions)
+- Browser DB + sync: [TinyBase](https://tinybase.org/guides/)
 
 ## Repository Structure
 
@@ -51,12 +53,15 @@ Try a proof-of-concept for the core features:
 │   │
 │   └── shared/                # Shared source
 │       ├── todo-list.tsx        # UI only component
-│       ├── todo-state.tsx       # Ephemeral `React.useState` hook
+│       ├── todo-store.tsx       # TinyBase DB
 │       ├── log.ts               # Console logging + info util
 │       └── styles.css           # Basic styles
 │
 ├── .env                       # Local env vars (git ignored)
-├── .env.example               # Local env vars example
+├── .env.example               # Local env vars example (git ignored)
+│
+├── README.md                  # This file
+├── package.json               # Dependencies + scripts
 │
 ├── tsconfig.json               # Root TS config
 ├── tsconfig.app.json             # Web + extension + shared TS config
